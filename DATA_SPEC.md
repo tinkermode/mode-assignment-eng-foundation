@@ -37,6 +37,7 @@ Fields:
 
 - The Edge Device Simulator may occasionally send malformed payloads. Decide how your service handles invalid records and document that behavior in `DESIGN.md`.
 - The Edge Device Simulator dispatches requests concurrently and does not pace itself based on response time.
+- The Edge Device Simulator retries transient failures with bounded attempts: `5xx` responses are retried with backoff, `429` responses are retried respecting the `Retry-After` header. After the retry budget is exhausted, or on connection errors and other `4xx` responses, the record is dropped at the edge and will not be re-sent.
 
 ---
 

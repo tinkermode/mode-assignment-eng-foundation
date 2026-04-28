@@ -49,7 +49,9 @@ All API contracts are documented in `DATA_SPEC.md`. Key points:
 
 ## Design Expectations
 
-Your aggregation service should stay responsive and available under realistic operating conditions. The provided Transform and Storage services behave like real backends — read `DATA_SPEC.md` for their contracts and decide how your service should handle what you find there.
+Your aggregation service should stay responsive and available even when downstream services are slow or failing. The provided Transform and Storage services behave like real backends — read `DATA_SPEC.md` for their contracts and decide how your service should handle what you find there.
+
+Aim to deliver every valid record the service has accepted. Dropping accepted valid records is a failure mode, not a design choice. Invalid payloads are a separate matter — see `DATA_SPEC.md`.
 
 The exact success response for an accepted payload is part of your API design. Document your choice and trade-offs in `DESIGN.md`.
 
